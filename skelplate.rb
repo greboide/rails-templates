@@ -47,6 +47,167 @@ CODE
 
 generate :rspec
 generate :cucumber
+file("features/step_definitions/webrat_pt.rb") do
+%q{
+  # encoding: utf-8
+
+  require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
+
+  Dado /^que eu estou em (.+)$/ do |page_name|
+    Given %{I am on #{page_name}}
+  end
+
+  Quando /^eu vou para (.+)$/ do |page_name|
+    When %{I go to #{page_name}}
+  end
+
+  Quando /^eu aperto "([^\"]*)"$/ do |button|
+    When %{I press "#{button}"}
+  end
+
+  Quando /^eu clicar "([^\"]*)"$/ do |link|
+    When %{I follow "#{link}"}
+  end
+
+  Quando /^eu clicar em "([^\"]*)"$/ do |link|
+    When %{I follow "#{link}"}
+  end
+
+  Quando /^eu clico em "([^\"]*)"$/ do |link|
+    save_and_open_page
+    When %{I follow "#{link}"}
+  end
+
+  Quando /^eu clicar "([^\"]*)" dentro de "([^\"]*)"$/ do |link, parent|
+    When %{I follow "#{link}" within "#{parent}"}
+  end
+
+  Quando /^eu preencho "([^\"]*)" com "([^\"]*)"$/ do |field, value|
+    When %{I fill in "#{field}" with "#{value}"}
+  end
+  Quando /^eu preencher "([^\"]*)" com "([^\"]*)"$/ do |field, value|
+    When %{I fill in "#{field}" with "#{value}"}
+  end
+
+  Quando /^eu preencho "([^\"]*)" para "([^\"]*)"$/ do |value, field|
+    When %{I fill in "#{value}" for "#{field}"}
+  end
+
+  Quando /^eu preencho o seguinte:$/ do |fields|
+    When %{I fill in the following:}, fields
+  end
+
+  Quando /^eu seleciono "([^\"]*)" de "([^\"]*)"$/ do |value, field|
+    When %{I select "#{value}" from "#{field}"}
+  end
+
+  Quando /^eu seleciono "([^\"]*)" como a data e a hora$/ do |time|
+    When %{I select "#{time}" as the date and time}
+  end
+
+  Quando /^eu seleciono "([^\"]*)" como a data e a hora "([^\"]*)"$/ do |datetime, datetime_label|
+    When %{I select "#{datetime}" as the "#{datetime_label}" date and time}
+  end
+
+  Quando /^eu seleciono "([^\"]*)" como a hora$/ do |time|
+    When %{I select "#{time}" as the time}
+  end
+
+  Quando /^eu seleciono "([^\"]*)" como a hora "([^\"]*)"$/ do |time, time_label|
+    When %{I select "#{time}" as the "#{time_label}" time}
+  end
+
+  Quando /^eu seleciono "([^\"]*)" como a data$/ do |date|
+    When %{I select "#{date}" as the date}
+  end
+
+  Quando /^eu seleciono "([^\"]*)" como a data "([^\"]*)"$/ do |date, date_label|
+    When %{I select "#{date}" as the "#{date_label}" date}
+  end
+
+  Quando /^eu seleciono "([^\"]*)" como "([^\"]*)"$/ do |date, date_label|
+    When %{I select "#{date}" as the "#{date_label}" date}
+  end
+
+  Quando /^eu marco "([^\"]*)"$/ do |field|
+    When %{I check "#{field}"}
+  end
+
+  Quando /^eu desmarco "([^\"]*)"$/ do |field|
+    When %{I uncheck "#{field}"}
+  end
+
+  Quando /^eu escolho "([^\"]*)"$/ do |field|
+    When %{I choose "#{field}"}
+  end
+
+  Quando /^eu anexo o arquivo em "([^\"]*)" a "([^\"]*)"$/ do |path, field|
+    When %{I attach the file "#{path}" to "#{field}"}
+  end
+
+  Então /^eu devo ver "([^\"]*)"$/ do |text|
+    Then %{I should see "#{text}"}
+  end
+
+  Então /^eu devo ver "([^\"]*)" dentro de "([^\"]*)"$/ do |text, selector|
+    Then %{I should see "#{text}" within "#{selector}"}
+  end
+
+  Então /^eu devo ver \/([^\/]*)\/$/ do |regexp|
+    Then %{I should see /#{regexp}/}
+  end
+
+  Então /^eu devo ver \/([^\/]*)\/ dentro de "([^\"]*)"$/ do |regexp, selector|
+    Then %{I should see /#{regexp}/ within "#{selector}"}
+  end
+
+  Então /^eu não devo ver "([^\"]*)"$/ do |text|
+    Then %{I should not see "#{text}"}
+  end
+
+  Então /^eu não devo ver "([^\"]*)" dentro de "([^\"]*)"$/ do |text, selector|
+    Then %{I should not see "#{text}" within "#{selector}"}
+  end
+
+  Então /^eu não devo ver \/([^\/]*)\/$/ do |regexp|
+    Then %{I should not see /#{regexp}/}
+  end
+
+  Então /^eu não devo ver \/([^\/]*)\/ dentro de "([^\"]*)"$/ do |regexp, selector|
+    Then %{I should not see /#{regexp}/ within "#{selector}"}
+  end
+
+  Então /^o campo "([^\"]*)" deve conter "([^\"]*)"$/ do |field, value|
+    Then %{the "#{field}" field should contain "#{value}"}
+  end
+
+  Então /^o campo "([^\"]*)" não deve conter "([^\"]*)"$/ do |field, value|
+    Then %{the "#{field}" field should not contain "#{value}"}
+  end
+
+  Então /^o checkbox "([^\"]*)" deve estar marcado$/ do |label|
+    Then %{the "#{label}" checkbox should be checked}
+  end
+
+  Então /^o checkbox "([^\"]*)" não deve estar marcado$/ do |label|
+    Then %{the "#{label}" checkbox should not be checked}
+  end
+
+  Então /^eu devo estar na (.+)$/ do |page_name|
+    Then %{I should be on #{page_name}}
+  end
+
+  Então /^eu devo estar em (.+)$/ do |page_name|
+    Then %{I should be on #{page_name}}
+  end
+
+
+  Então /^mostre-me a página$/ do
+    Then %{show me the page}
+  end
+
+}
+end
 
 run "rm public/index.html"
 
@@ -169,7 +330,9 @@ pt-BR:
   change_password: "Alterar senha"
   edit_account: "Editar conta"
   user_form: "Formulário do usuário"
-
+  password_success_update: "Senha atualizada com successo"
+  account_created: "Sua conta foi criada. Por favor cheque seu email para as instruções de ativação!"
+  email_confirm_account: "Você deve receber um email para confirmar sua conta. Por favor clique no link para ativá-la."
   EOF
 end
 
@@ -202,7 +365,7 @@ class #{session_class.camelize.pluralize}Controller < ResourceController::Single
   create.failure.wants.html { render :action => "new" }
   create do
     success.wants.html { redirect_to user_path(current_user) }
-    success.flash "You should receive an email to confirm your account. Please click on the link to activate your account."
+    success.flash(t(:email_confirm_account))
     failure.wants.html { render :action => "new" }
   end
   destroy.wants.html { redirect_to root_path }
@@ -273,7 +436,7 @@ class #{user_class.camelize.pluralize}Controller < ResourceController::Base
 
     if @#{user_class}.signup(params[:#{user_class}])
       @#{user_class}.deliver_activation_instructions!
-      add_notice "Your account has been created. Please check your e-mail for your account activation instructions!"
+      add_notice t(:account_created)
       redirect_to new_#{session_class}_path
     else
       render :action => :new
@@ -544,7 +707,7 @@ class PasswordResetsController < ApplicationController
     @#{user_class}.password = params[:#{user_class}][:password]
     @#{user_class}.password_confirmation = params[:#{user_class}][:password_confirmation]
     if @#{user_class}.save
-      add_notice "Password successfully updated"
+      add_notice t(:password_success_update)
       redirect_to #{user_class}_path(@#{user_class})
     else
       add_error "Unable to update your password, try again."
@@ -662,7 +825,7 @@ end
 file('app/models/notifier.rb') do
   <<-EOF
 class Notifier < ActionMailer::Base
-  default_url_options[:host] = ""
+  default_url_options[:host] = "localhost:3000"
 
   def password_reset_instructions(user)
     subject       "Password Reset Instructions"
@@ -864,6 +1027,48 @@ end
 git :add => "."
 git :commit => "-m 'Adding test builders and helpers'"
 
+file("features/autenticacao.feature") do
+  <<-EOF
+# language: pt
+Funcionalidade: Autenticação
+  Para que as pessoas usem meu aplicativo
+  Como um desenvolvedor
+  Eu quero prover:- registrar, logar, ativar e resetar a senha
+  Cenário: registrar
+    Dado que eu estou em new_user
+    E eu sou um novo usuário
+    Quando eu preencher "user[email]" com "valid@email.com"
+    E eu preencher "Password" com "password"
+    E eu preencher "user[password_confirmation]" com "password"
+    E eu aperto "Salvar"
+    Então eu devo ver "Sua conta foi criada. Por favor cheque seu email para as instruções de ativação!"
+    E eu devo estar em new_user_session
+    Quando eu abrir o email
+    E eu clicar no primeiro link do email
+    Então eu devo estar na página de login
+  Cenário: Logar
+    Dado que eu sou um usuário existente
+    E que eu estou em new_user_session
+    Quando eu preencher "user_session[email]" com "valid@email.com"
+    E eu preencher "user_session[password]" com "password"
+    E eu aperto "Logar"
+    Então eu devo estar na página da minha conta
+  Cenário: Resetando a senha
+    Dado que eu sou um usuário existente
+    E que eu estou em new_password_reset
+    Quando eu preencho "user[email]" com "valid@email.com"
+    E eu aperto "Recuperar senha"
+    Então eu devo ver "Instructions"
+    Quando eu abro o email
+    E eu clico no primeiro link do email
+    E eu preencho "Password" com "soccer"
+    E eu preencho "Password confirmation" com "soccer"
+    E eu aperto "Alterar senha"
+    Então eu devo estar na página da minha conta
+    E eu devo ver "Senha atualizada com sucesso"
+  EOF
+end
+
 file("features/authentication.feature") do
   <<-EOF
 Feature: Authentication
@@ -925,6 +1130,17 @@ Given /^I requested a password reset$/ do
   @user.reset_perishable_token!
 end
 
+Dado /^eu sou um novo usuário$/ do
+  @user = new_user(:email => "some@email.com")
+end
+
+Dado /^que eu sou um usuário existente$/ do
+  @user = valid_user(:email => "valid@email.com", :password => "password", :password_confirmation => "password")
+  @user.save
+  @user.activate!
+end
+
+
   EOF
 end
 
@@ -971,7 +1187,10 @@ file("features/support/paths.rb") do
          edit_password_reset_path(:id => User.last.perishable_token)
        when /the login page/
          new_user_session_path
-
+       when /página da minha conta/
+         user_path(User.last.id)
+       when /página de login/
+         new_user_session_path
        else
          begin
            eval(page_name+'_path')
@@ -994,6 +1213,41 @@ Then /^I save and open page$/ do
   save_and_open_page
 end
 
+Então /^Eu salvo e abro a página$/ do
+  save_and_open_page
+end
+  EOF
+end
+file("features/step_definitions/email_steps_pt.rb") do
+  <<-EOF
+module EmailHelpers
+  def current_email_address
+    # Replace with your a way to find your current email. e.g @current_user.email
+    # last_email_address will return the last email address used by email spec to find an email.
+    # Note that last_email_address will be reset after each Scenario.
+    last_email_address || "valid@email.com"
+  end
+end
+
+World(EmailHelpers)
+
+Quando /^eu sigo "([^"]*?)" no email$/ do |link|
+  visit_in_email(link)
+end
+
+Quando /^(?:I|they|eu) clico no primeiro link do email$/ do
+  click_first_link_in_email
+end
+Quando /^eu clicar no primeiro link do email$/ do
+  click_first_link_in_email
+end
+
+Quando /^(?:I|they|eu|"([^"]*?)") abro o email$/ do |address|
+  open_email(address)
+end
+Quando /^(?:I|they|eu|"([^"]*?)") abrir o email$/ do |address|
+  open_email(address)
+end
   EOF
 end
 
@@ -1013,6 +1267,7 @@ footer = <<-FOOTER
 # Last Steps:
 # 1. Set up any acl you would like in your controllers. Check out the Authlogic tutorials for examples.
 # 2. Edit the url host name in Notifier.rb or your emails won't work.
+
 # 3. Edit the #current_email_address method in features/step_definitions/email_steps.rb
 # 4. rake spec && rake features
 # 5. Profit!
