@@ -56,6 +56,9 @@ file("features/step_definitions/webrat_pt.rb") do
   Dado /^que eu estou em (.+)$/ do |page_name|
     Given %{I am on #{page_name}}
   end
+  Dado /^que eu estou na (.+)$/ do |page_name|
+    Given %{I am on #{page_name}}
+  end
 
   Quando /^eu vou para (.+)$/ do |page_name|
     When %{I go to #{page_name}}
@@ -1035,9 +1038,9 @@ Funcionalidade: Autenticação
   Como um desenvolvedor
   Eu quero prover:- registrar, logar, ativar e resetar a senha
   Cenário: registrar
-    Dado que eu estou em new_user
+    Dado que eu estou na página de registro de usuário
     E eu sou um novo usuário
-    Quando eu preencher "user[email]" com "valid@email.com"
+    Quando eu preencher "user[email]" com "some@email.com"
     E eu preencher "Password" com "password"
     E eu preencher "user[password_confirmation]" com "password"
     E eu aperto "Salvar"
@@ -1191,6 +1194,8 @@ file("features/support/paths.rb") do
          user_path(User.last.id)
        when /página de login/
          new_user_session_path
+       when /página de registro de usuário/
+         new_user_path
        else
          begin
            eval(page_name+'_path')
@@ -1213,7 +1218,7 @@ Then /^I save and open page$/ do
   save_and_open_page
 end
 
-Então /^Eu salvo e abro a página$/ do
+Então /^eu salvo e abro a página$/ do
   save_and_open_page
 end
   EOF
@@ -1225,7 +1230,7 @@ module EmailHelpers
     # Replace with your a way to find your current email. e.g @current_user.email
     # last_email_address will return the last email address used by email spec to find an email.
     # Note that last_email_address will be reset after each Scenario.
-    last_email_address || "valid@email.com"
+    last_email_address || (@current_user && @current_user.email) || (@user && @user.email) || "valid@email.com"
   end
 end
 
