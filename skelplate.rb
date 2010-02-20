@@ -279,11 +279,10 @@ production:
   username: root
   password:
 cucumber:
-  adapter: postgresql
-  encoding: utf8
-  database: #{app_name}_cuc
-  username: root
-  password:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
 
   EOF
 end
@@ -333,7 +332,7 @@ pt-BR:
   change_password: "Alterar senha"
   edit_account: "Editar conta"
   user_form: "Formulário do usuário"
-  password_success_update: "Senha atualizada com successo"
+  password_success_update: "Senha atualizada com sucesso"
   account_created: "Sua conta foi criada. Por favor cheque seu email para as instruções de ativação!"
   email_confirm_account: "Você deve receber um email para confirmar sua conta. Por favor clique no link para ativá-la."
   EOF
