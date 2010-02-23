@@ -13,6 +13,8 @@ gem 'postgres', :lib => 'postgres'
 gem 'rspec', :source => "http://gems.github.com", :lib => false
 gem 'rspec-rails', :source => "http://gems.github.com", :lib => false
 gem 'cucumber', :lib => false
+gem 'cucumber-rails', :lib => false
+gem 'igniter', :lib => false
 gem 'webrat', :lib => false
 gem "bmabey-email_spec", :source => "http://gems.github.com", :lib => "email_spec"
 
